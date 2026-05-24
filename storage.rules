@@ -1,0 +1,25 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // allow uploads to chats only by authenticated users
+    match /chats/{chatId}/{allPaths=**} {
+      allow read: if isAdmin() || isChatOwner(chatId);
+      allow write: if request.auth != null && (isAdmin() || isChatOwner(chatId))
+        && request.resource.size < 2 * 1024 * 1024
+        && (request.resource.contentType.matches('image/.*'));
+    }
+
+    match /{allPaths=**} {
+      allow read: if false;
+      allow write: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+    function isChatOwner(chatId){
+      return request.auth != null && exists(/databases/$(database)/documents/chats/$(chatId)) &&
+        get(/databases/$(database)/documents/chats/$(chatId)).data.customerToken == request.auth.uid;
+    }
+  }
+}

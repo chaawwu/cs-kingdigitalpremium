@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KingDigitalPremium - Customer Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="chat-app">
+    <header class="chat-header">
+      <h1>KingDigitalPremium Support</h1>
+      <p class="brand-sub">Customer Service</p>
+    </header>
+
+    <main class="chat-main">
+      <section id="intro" class="card">
+        <h2>Mulai Chat</h2>
+        <form id="startForm">
+          <label>Nama<input type="text" id="customerName" required></label>
+          <label>Nomor WhatsApp<input type="tel" id="whatsapp" required></label>
+          <label>ID Pesanan / ID Produk<input id="orderId" required></label>
+          <label>Produk yang dibeli<input id="productName" required></label>
+          <label>Jenis pertanyaan
+            <select id="questionType" required>
+              <option value="kendala_login">Kendala login</option>
+              <option value="claim_garansi">Claim garansi</option>
+              <option value="status_pesanan">Status pesanan</option>
+              <option value="pembayaran">Pembayaran</option>
+              <option value="produk_belum_diterima">Produk belum diterima</option>
+              <option value="lainnya">Lainnya</option>
+            </select>
+          </label>
+          <button type="submit" class="btn">Mulai Chat</button>
+        </form>
+      </section>
+
+      <section id="chatSection" class="card hidden">
+        <div class="chat-meta">
+          <div><strong>Nomor Antrian:</strong> <span id="queueNumber"></span></div>
+          <div><strong>Nama:</strong> <span id="metaName"></span></div>
+          <div><strong>Produk:</strong> <span id="metaProduct"></span></div>
+          <div><strong>ID Pesanan:</strong> <span id="metaOrder"></span></div>
+          <div><strong>Status:</strong> <span id="metaStatus"></span></div>
+        </div>
+
+        <div id="messages" class="messages"></div>
+
+        <form id="messageForm" class="message-form">
+          <input id="messageInput" placeholder="Ketik pesan..." required autocomplete="off">
+          <input id="imageInput" type="file" accept="image/*">
+          <button type="submit" class="btn">Kirim</button>
+        </form>
+
+        <div id="newChatWrap" class="hidden">
+          <button id="newChatBtn" class="btn ghost">Ajukan Chat Baru</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="chat-footer">
+      <small>KingDigitalPremium ©</small>
+    </footer>
+  </div>
+
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="chat.js"></script>
+</body>
+</html>

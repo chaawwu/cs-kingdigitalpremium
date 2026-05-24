@@ -1,0 +1,11 @@
+# Node / generic
+node_modules/
+.env
+serviceAccountKey.json
+
+# Netlify
+.netlify/
+
+# Editor
+.vscode/
+*.log
